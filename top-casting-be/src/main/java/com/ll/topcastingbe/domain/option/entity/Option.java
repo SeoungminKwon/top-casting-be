@@ -34,4 +34,12 @@ public class Option {
 	public void deductionStock(Long itemQuantity) {
 		this.stock -= itemQuantity;
 	}
+
+	public void change(String colorName, int stock) {
+		if(stock < 0) {
+			return;
+		}
+		this.colorName = colorName;
+		this.stock = stock;
+	}
 }
