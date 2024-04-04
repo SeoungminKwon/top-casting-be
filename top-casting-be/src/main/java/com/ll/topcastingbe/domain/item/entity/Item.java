@@ -41,4 +41,11 @@ public class Item extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     private SubCategory subCategory;
 
+    public void changeItemName(String itemName) {
+        this.itemName = itemName;
+    }
+
+    public void changeItemPrice(BigDecimal itemPrice) {
+        this.itemPrice = itemPrice;
+    }
 }

@@ -1,6 +1,8 @@
 package com.ll.topcastingbe.domain.item.controller;
 
 import com.ll.topcastingbe.domain.item.dto.request.ItemCreateRequestDto;
+import com.ll.topcastingbe.domain.item.dto.request.ItemNameUpdateRequestDto;
+import com.ll.topcastingbe.domain.item.dto.request.ItemPriceUpdateRequestDto;
 import com.ll.topcastingbe.domain.item.dto.response.ItemDetailResponseDto;
 import com.ll.topcastingbe.domain.item.search.dto.SearchItemDto;
 import com.ll.topcastingbe.domain.item.search.service.ItemSearchService;
@@ -13,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -84,4 +87,19 @@ public class ItemController {
         Slice<SearchItemDto> subCategoryItem = itemSearchService.getItemsBySubcategory(pageable, id);
         return ResponseEntity.ok().body(subCategoryItem);
     }
+
+    @PreAuthorize("hasRole('ADMIN')") //아이템 이름 변경은 관리자만 가능
+    @PatchMapping("/{itemId}/itemName")
+    public ResponseEntity<?> itemNameModify(@PathVariable Long itemId, @RequestBody ItemNameUpdateRequestDto updateDto){
+        itemService.modifyItemName(itemId,updateDto);
+        return ResponseEntity.ok(null);
+    }
+
+    @PreAuthorize("hasRole('ADMIN')") //아이템 이름 변경은 관리자만 가능
+    @PatchMapping("/{itemId}/itemPrice")
+    public ResponseEntity<?> itemPriceModify(@PathVariable Long itemId, @RequestBody ItemPriceUpdateRequestDto updateDto){
+        itemService.modifyItemPrice(itemId,updateDto);
+        return ResponseEntity.ok(null);
+    }
+
 }
