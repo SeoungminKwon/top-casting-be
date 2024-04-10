@@ -41,7 +41,7 @@ public class ItemController {
 
     @PreAuthorize("hasRole('ADMIN')") //상품 추가는 관리자만 가능
     @PostMapping
-    public ResponseEntity<?> itemAdd(@RequestBody ItemCreateRequestDto itemRequestDto) {
+    public ResponseEntity<?> itemAdd(@RequestBody @Valid ItemCreateRequestDto itemRequestDto) {
 
         log.info("itemRequestDto={}", itemRequestDto);
         log.info("itemColors={}", itemRequestDto.getItemColors());
