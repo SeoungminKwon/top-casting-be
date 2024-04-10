@@ -3,6 +3,7 @@ package com.ll.topcastingbe.domain.option.controller;
 import com.ll.topcastingbe.domain.option.dto.request.OptionCreateRequestDto;
 import com.ll.topcastingbe.domain.option.dto.request.OptionModifyRequestDto;
 import com.ll.topcastingbe.domain.option.service.OptionService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -25,7 +26,7 @@ public class OptionController {
 
     @PreAuthorize("hasRole('ADMIN')") //옵션 추가는 관리자만 가능
     @PostMapping
-    public ResponseEntity<?> optionAdd(@RequestBody OptionCreateRequestDto createDto) {
+    public ResponseEntity<?> optionAdd(@RequestBody @Valid OptionCreateRequestDto createDto) {
 
         Long optionId = optionService.addOption(createDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(optionId);
@@ -34,7 +35,7 @@ public class OptionController {
     @PreAuthorize("hasRole('ADMIN')") //옵션 수정은 관리자만 가능
     @PatchMapping("/{optionId}")
     public ResponseEntity<?> modifyOption(@PathVariable Long optionId,
-                                          @RequestBody OptionModifyRequestDto modifyDto) {
+                                          @RequestBody @Valid OptionModifyRequestDto modifyDto) {
         optionService.optionModify(optionId, modifyDto);
         return ResponseEntity.ok(null);
     }

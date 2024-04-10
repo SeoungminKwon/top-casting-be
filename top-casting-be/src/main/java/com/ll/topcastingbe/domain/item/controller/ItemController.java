@@ -8,6 +8,7 @@ import com.ll.topcastingbe.domain.item.dto.response.ItemDetailResponseDto;
 import com.ll.topcastingbe.domain.item.search.dto.SearchItemDto;
 import com.ll.topcastingbe.domain.item.search.service.ItemSearchService;
 import com.ll.topcastingbe.domain.item.service.ItemService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
@@ -91,22 +92,32 @@ public class ItemController {
 
     @PreAuthorize("hasRole('ADMIN')") //아이템 이름 변경은 관리자만 가능
     @PatchMapping("/{itemId}/itemName")
-    public ResponseEntity<?> itemNameModify(@PathVariable Long itemId, @RequestBody ItemNameUpdateRequestDto updateDto){
-        itemService.modifyItemName(itemId,updateDto);
+    public ResponseEntity<?> itemNameModify(@PathVariable Long itemId,
+                                            @RequestBody @Valid ItemNameUpdateRequestDto updateDto) {
+        itemService.modifyItemName(itemId, updateDto);
         return ResponseEntity.ok(null);
     }
 
     @PreAuthorize("hasRole('ADMIN')") //아이템 이름 변경은 관리자만 가능
     @PatchMapping("/{itemId}/itemPrice")
-    public ResponseEntity<?> itemPriceModify(@PathVariable Long itemId, @RequestBody ItemPriceUpdateRequestDto updateDto){
-        itemService.modifyItemPrice(itemId,updateDto);
+    public ResponseEntity<?> itemPriceModify(@PathVariable Long itemId,
+                                             @RequestBody @Valid ItemPriceUpdateRequestDto updateDto) {
+        itemService.modifyItemPrice(itemId, updateDto);
         return ResponseEntity.ok(null);
     }
 
     @PreAuthorize("hasRole('ADMIN')") //아이템 이미지 변경은 관리자만 가능
     @PatchMapping("/{itemId}/itemImage")
-    public ResponseEntity<?> itemImageModify(@PathVariable Long itemId, @RequestBody ItemImageUpdateRequestDto updateDto){
-        itemService.modifyItemImage(itemId,updateDto);
+    public ResponseEntity<?> itemImageModify(@PathVariable Long itemId,
+                                             @RequestBody ItemImageUpdateRequestDto updateDto) {
+
+        //Todo: Exception 고민해보기
+        //이미지와 상세이미지 모두 없다면 예외처리
+        if (!updateDto.hasImage() && !updateDto.hasDetailedImage()) {
+            throw new IllegalArgumentException();
+        }
+
+        itemService.modifyItemImage(itemId, updateDto);
         return ResponseEntity.ok(null);
     }
 
