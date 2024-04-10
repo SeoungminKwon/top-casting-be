@@ -29,4 +29,13 @@ public class GlobalExceptionControllerAdvice {
                         .build());
     }
 
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<ErrorResponseDto> handleIllegalArgumentException(IllegalArgumentException ex) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(ErrorResponseDto.builder()
+                        .code(HttpStatus.BAD_REQUEST.toString())
+                        .message(ex.getMessage())
+                        .build());
+    }
+
 }
