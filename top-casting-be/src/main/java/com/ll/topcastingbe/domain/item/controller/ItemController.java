@@ -1,6 +1,7 @@
 package com.ll.topcastingbe.domain.item.controller;
 
 import com.ll.topcastingbe.domain.item.dto.request.ItemCreateRequestDto;
+import com.ll.topcastingbe.domain.item.dto.request.ItemImageUpdateRequestDto;
 import com.ll.topcastingbe.domain.item.dto.request.ItemNameUpdateRequestDto;
 import com.ll.topcastingbe.domain.item.dto.request.ItemPriceUpdateRequestDto;
 import com.ll.topcastingbe.domain.item.dto.response.ItemDetailResponseDto;
@@ -99,6 +100,13 @@ public class ItemController {
     @PatchMapping("/{itemId}/itemPrice")
     public ResponseEntity<?> itemPriceModify(@PathVariable Long itemId, @RequestBody ItemPriceUpdateRequestDto updateDto){
         itemService.modifyItemPrice(itemId,updateDto);
+        return ResponseEntity.ok(null);
+    }
+
+    @PreAuthorize("hasRole('ADMIN')") //아이템 이미지 변경은 관리자만 가능
+    @PatchMapping("/{itemId}/itemImage")
+    public ResponseEntity<?> itemImageModify(@PathVariable Long itemId, @RequestBody ItemImageUpdateRequestDto updateDto){
+        itemService.modifyItemImage(itemId,updateDto);
         return ResponseEntity.ok(null);
     }
 

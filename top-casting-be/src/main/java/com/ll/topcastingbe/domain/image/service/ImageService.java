@@ -63,7 +63,7 @@ public class ImageService {
         return detailedImageRepository.save(detailedImage);
     }
 
-    private ImageUploadDto createImageUploadDto(String itemName, String base64){
+    private ImageUploadDto createImageUploadDto(String itemName, String base64) {
 
         byte[] decodedFile = Base64.getMimeDecoder().decode(base64.substring(base64.indexOf(",") + 1));
         String contentType = base64.substring(base64.indexOf(":"), base64.indexOf(";"));
@@ -85,11 +85,27 @@ public class ImageService {
                 new PutObjectRequest(bucket, fullName, new ByteArrayInputStream(decodedFile), metadata));
         String imageUrl = amazonS3.getUrl(bucket, fullName).toString();
 
-        return new ImageUploadDto(imageUrl,imageName,fullName,LocalDateTime.now());
+        return new ImageUploadDto(imageUrl, imageName, fullName, LocalDateTime.now());
+    }
+
+    @Transactional
+    public void deleteImage(Image image) {
+
+        amazonS3.deleteObject(bucket, image.getFullName());
+
+        imageRepository.delete(image);
+    }
+
+    @Transactional
+    public void deleteDetailedImage(DetailedImage detailedImage) {
+
+        amazonS3.deleteObject(bucket, detailedImage.getFullName());
+
+        detailedImageRepository.delete(detailedImage);
     }
 
     @Getter
-    private static class ImageUploadDto{
+    private static class ImageUploadDto {
         private final String imageUrl;
         private final String imageName;
         private final String fullName;

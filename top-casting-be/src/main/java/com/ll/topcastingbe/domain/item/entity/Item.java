@@ -48,4 +48,9 @@ public class Item extends BaseEntity {
     public void changeItemPrice(BigDecimal itemPrice) {
         this.itemPrice = itemPrice;
     }
+
+    public void changeImage(Image image, DetailedImage detailedImage) {
+        this.image = image;
+        this.detailedImage = detailedImage;
+    }
 }
