@@ -1,4 +1,6 @@
 spring:
+  profiles:
+    include: secret
   h2:
     console:
       enabled: true
@@ -7,6 +9,12 @@ spring:
   sql:
     init:
       mode: always
+
+  datasource:
+    url: jdbc:h2:mem:topcasting;MODE=MySQL
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
 
   jpa:
     properties:
@@ -22,3 +30,12 @@ logging:
       hibernate:
         SQL: debug
         type: trace
+
+delivery:
+  fee: 2500
+
+custom:
+  site:
+    front_url: http://localhost:3000
+    back_url: http://localhost:8080
+

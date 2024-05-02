@@ -1,5 +1,6 @@
 package com.ll.topcastingbe.domain.image.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -19,8 +20,11 @@ public class DetailedImage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String path;
-    private String imageName;
-    private String originFileName;
+    @Column(nullable = false)
+    private String path; // S3경로 또는 로컬 파일 경로
+    @Column(nullable = false)
+    private String imageName; //UUID + 상품이름
+    @Column(nullable = false)
+    private String fullName; //디렉토리 + imageName
     private LocalDateTime createdDate;
 }

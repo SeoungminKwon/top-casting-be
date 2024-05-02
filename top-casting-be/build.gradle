@@ -25,13 +25,16 @@ dependencies {
     //SPRING-DATA-JPA
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     //Oauth2
-    //implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
     //SECURITY
-    //implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
     //VALIDATION
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     //SPRING-WEB
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    //SPRING-AOP
+    implementation 'org.springframework.retry:spring-retry'
+    implementation 'org.springframework.boot:spring-boot-starter-aop'
     //LOMBOK
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
@@ -42,6 +45,11 @@ dependencies {
     //TEST
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     //testImplementation 'org.springframework.security:spring-security-test'
+    // jwt
+    // Java JWT 라이브러리 추가
+    implementation 'com.auth0:java-jwt:3.10.2'
+    //AWS-S3
+    implementation 'com.amazonaws:aws-java-sdk-s3:1.12.638'
 }
 
 tasks.named('test') {

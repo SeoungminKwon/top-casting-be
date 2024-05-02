@@ -3,6 +3,7 @@ package com.ll.topcastingbe.domain.payment.entity;
 import java.util.Arrays;
 import lombok.Getter;
 
+
 @Getter
 public enum PayType {
     CARD, CASH, POINT;

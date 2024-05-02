@@ -5,7 +5,8 @@ import lombok.Getter;
 
 @Getter
 public enum OrderStatus {
-    WAITING, SHIPPING, DELIVERED, EXCHANGE, REFUND;
+    WAITING, SHIPPING, DELIVERED, EXCHANGE, REFUND, ORDER_REFUND_REQUESTED,
+    ORDER_EXCHANGE_REQUESTED;
 
     public static OrderStatus checkOrderStatus(final String status) {
         return Arrays.stream(OrderStatus.values())

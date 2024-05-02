@@ -12,11 +12,13 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import java.util.UUID;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+
 
 @Getter
 @SuperBuilder
@@ -37,8 +39,13 @@ public class Payment extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     private Orders order;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Member member;
-
     private String paymentKey;
+
+    public UUID getOrderId() {
+        return order.getId();
+    }
+
+    public String getCustomerAddress() {
+        return order.getCustomerAddress();
+    }
 }
