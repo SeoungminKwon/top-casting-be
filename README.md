@@ -1,6 +1,5 @@
 
 <div align="center">
-# Jenkins
 # 🐟 Top-Casting - 낚시 용품 쇼핑몰
 
 <img src="https://github.com/team-pepero/top-casting-be/assets/134862092/c4c56fd9-541f-42af-b9da-c01fd66da942" alt="Top-Casting 로고">
