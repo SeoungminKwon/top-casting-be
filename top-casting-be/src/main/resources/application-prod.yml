@@ -4,6 +4,9 @@ spring:
     url: jdbc:mysql://172.17.0.1:3306/site1_prod
     username: lldjlocal
     password: 1234
+  sql:
+    init:
+      mode: never
 custom:
   site:
     front_url: https://localhost:3000
