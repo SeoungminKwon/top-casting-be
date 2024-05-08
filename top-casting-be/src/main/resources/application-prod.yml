@@ -11,5 +11,5 @@ spring:
 
 custom:
   site:
-    front_url: https://localhost:3000
+    front_url: https://top-casting.vercel.app
     back_url: https://api.topcating.bdkms.com:8080
