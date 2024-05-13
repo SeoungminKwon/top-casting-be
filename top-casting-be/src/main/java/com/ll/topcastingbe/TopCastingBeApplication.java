@@ -27,6 +27,10 @@ public class TopCastingBeApplication {
 		@PostConstruct
 		public void logProfile() {
 			logger.info("Active profiles: {}", Arrays.toString(env.getActiveProfiles()));
+
+			// Google OAuth2 Redirect URI 설정 값 로깅
+			String googleRedirectUri = env.getProperty("spring.security.oauth2.client.registration.google.redirect-uri");
+			logger.info("Google Redirect URI: {}", googleRedirectUri);
 		}
 	}
 
